@@ -1,0 +1,16 @@
+﻿@page "/tempo"
+@inject IJSRuntime JSRuntime;
+
+
+<h3>Metronome</h3>
+<input type="range" @bind-value="sliderValue" min="40" max="280" @bind-value:event="oninput" />
+<div >
+    BPM:@sliderValue
+</div>
+
+
+
+@code {
+
+    string sliderValue = "120";
+}
