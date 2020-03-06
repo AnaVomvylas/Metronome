@@ -2,15 +2,26 @@
 @inject IJSRuntime JSRuntime;
 
 
-<h3>Metronome</h3>
-<input id ="bpmslider"type="range" min="40" max="280" value="@bpm" @oninput="valueChange =>SliderOnInput((string)valueChange.Value)" />
-<div >
-    BPM:@bpm
+<h3 style="text-align:center">Metronome</h3>
+<div class="row text-center">
+    <div class="col-4"></div>
+    <div class="col-4">
+        <br />
+        <input class="ml-3" id="bpmslider" type="range" min="40" max="280" value="@bpm" @oninput="valueChange =>SliderOnInput((string)valueChange.Value)" />
+        <br />
+        <br />
+        <div>BPM:@bpm</div>
+    </div>
+    <div class="col-4"></div>
 </div>
-
-<div id="metronomebtns">
-    <button id="play" class="oi oi-media-play" @onclick="PlayMetronome"></button>
-    <button id="stop" class="oi oi-media-stop" @onclick="StopMetronome"></button>
+<br />
+<div class="row text-center">
+    <div class="col-4"></div>
+    <div class="col-4">
+        <button id="play" class="oi oi-media-play p-3 m-3" @onclick="PlayOnClick"></button>
+        <button id="stop" class="oi oi-media-stop p-3 m-3" @onclick="StopOnClick"></button>
+    </div>
+    <div class="col-4"></div>
 </div>
 
 
@@ -23,12 +34,12 @@
         await JSRuntime.InvokeVoidAsync("TempoOnChange", bpm);
     }
 
-    public async void PlayMetronome()
+    public async void PlayOnClick()
     {
-        await JSRuntime.InvokeVoidAsync("playMetronome",bpm);
+        await JSRuntime.InvokeVoidAsync("playMetronome", bpm);
     }
 
-    public async void StopMetronome()
+    public async void StopOnClick()
     {
         await JSRuntime.InvokeVoidAsync("stopMetronome");
     }
