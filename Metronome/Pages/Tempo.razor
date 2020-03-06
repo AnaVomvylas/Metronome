@@ -3,14 +3,33 @@
 
 
 <h3>Metronome</h3>
-<input type="range" @bind-value="sliderValue" min="40" max="280" @bind-value:event="oninput" />
+<input id ="bpmslider"type="range" min="40" max="280" value="@bpm" @oninput="valueChange =>SliderOnInput((string)valueChange.Value)" />
 <div >
-    BPM:@sliderValue
+    BPM:@bpm
+</div>
+
+<div id="metronomebtns">
+    <button id="play" class="oi oi-media-play" @onclick="PlayMetronome"></button>
+    <button id="stop" class="oi oi-media-stop" @onclick="StopMetronome"></button>
 </div>
 
 
-
 @code {
+    public string bpm = "120";
 
-    string sliderValue = "120";
+    private async void SliderOnInput(string value)
+    {
+        bpm = value;
+        await JSRuntime.InvokeVoidAsync("TempoOnChange", bpm);
+    }
+
+    public async void PlayMetronome()
+    {
+        await JSRuntime.InvokeVoidAsync("playMetronome",bpm);
+    }
+
+    public async void StopMetronome()
+    {
+        await JSRuntime.InvokeVoidAsync("stopMetronome");
+    }
 }

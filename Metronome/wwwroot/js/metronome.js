@@ -1,7 +1,7 @@
 ﻿//our main synth
-const synth = Tone.MembraneSynth().toMaster();
+const synth = new Tone.MembraneSynth().toMaster();
 
-const notesSequence = ["F2", "C2", "C2", "C2"];
+const notesSequence = ["G2", "C2", "C2", "C2"];
 
 //play the note in the notesSequence using synth, every beat (4th)
 const sequence = new Tone.Sequence(
@@ -24,5 +24,5 @@ function stopMetronome() {
 }
 
 function TempoOnChange(bpm) {
-    Tone.Transport.bpm = bpm;
+    Tone.Transport.bpm.value = bpm;
 }
